@@ -9,7 +9,7 @@ on:
         required: true
   push:
     branches:
-      - main
+      - feature/CCL-8850
   pull_request:
 
 permissions:
