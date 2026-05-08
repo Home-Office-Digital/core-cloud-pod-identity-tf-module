@@ -34,6 +34,7 @@ module "eks_pod_identity_arn_association" {
 
   use_name_prefix = false
   name            = each.key
+  role_arn        = var.existing_role_arn
 
   additional_policy_arns = tomap({
     for arn_policy in each.value.iam_policy_arn_association :
