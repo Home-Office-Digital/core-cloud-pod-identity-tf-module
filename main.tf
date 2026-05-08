@@ -2,7 +2,7 @@ locals {
   create_role = var.existing_role_arn == null
 }
 
-resource "cc_iam_role" "this" {
+resource "aws_iam_role" "this" {
   count              = local.create_role ? 1 : 0
   name               = var.role_name
   assume_role_policy = data.aws_iam_policy.pod_identity_assume.iam_policy_json
