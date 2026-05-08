@@ -32,8 +32,3 @@ variable "role_name" {
   type    = string
   default = null
 }
-
-variable "policy_arns" {
-  type    = list(string)
-  default = []
-}
