@@ -2,13 +2,6 @@ locals {
   create_role = var.existing_role_arn == null
 }
 
-resource "aws_iam_role" "this" {
-  count              = local.create_role ? 1 : 0
-  name               = var.role_name
-  assume_role_policy = data.aws_iam_policy.pod_identity_assume.iam_policy_json
-
-  tags = var.tags
-}
 
 data "aws_iam_policy_document" "pod_identity_assume" {
   statement {
@@ -24,6 +17,14 @@ data "aws_iam_policy_document" "pod_identity_assume" {
       "sts:TagSession"
     ]
   }
+}
+
+resource "aws_iam_role" "this" {
+  count              = local.create_role ? 1 : 0
+  name               = var.role_name
+  assume_role_policy = data.aws_iam_policy.pod_identity_assume.iam_policy_json
+
+  tags = var.tags
 }
 
 module "eks_pod_identity_arn_association" {
