@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "pod_identity_assume" {
 resource "aws_iam_role" "this" {
   count              = local.create_role ? 1 : 0
   name               = var.role_name
-  assume_role_policy = data.aws_iam_policy_document.pod_identity_assume.iam_policy_json
+  assume_role_policy = data.aws_iam_policy_document.pod_identity_assume.json
 
   tags = var.tags
 }
