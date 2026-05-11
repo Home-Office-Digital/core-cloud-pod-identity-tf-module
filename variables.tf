@@ -28,6 +28,11 @@ variable "existing_role_arn" {
   default = null
 }
 
+variable "role_name" {
+  type    = string
+  default = null
+}
+
 variable "create_iam_role" {
   type    = bool
   default = false
