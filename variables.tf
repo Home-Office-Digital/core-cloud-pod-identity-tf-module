@@ -32,8 +32,3 @@ variable "role_name" {
   type    = string
   default = null
 }
-
-variable "create_iam_role" {
-  type    = bool
-  default = false
-}
