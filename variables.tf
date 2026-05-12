@@ -1,7 +1,3 @@
-variable "association_config" {
-  type = any
-}
-
 variable "tags" {
   description = "Tags to be applied"
   type        = map(string)
@@ -32,6 +28,12 @@ variable "role_name" {
   type    = string
   default = null
 }
+
+variable "existing_role_name" {
+  type    = string
+  default = null
+}
+
 
 variable "policy_arn" {
   type    = string
