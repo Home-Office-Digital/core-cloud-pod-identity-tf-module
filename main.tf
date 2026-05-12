@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "this" {
-  count              = var.create_role == false ? 1 : 0
+  count              = var.create_role == true ? 1 : 0
   name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   tags               = var.tags
