@@ -3,7 +3,7 @@ variable "association_config" {
 }
 
 variable "tags" {
-  description = "Tags to be applied to the MSK"
+  description = "Tags to be applied"
   type        = map(string)
   default     = {}
 
