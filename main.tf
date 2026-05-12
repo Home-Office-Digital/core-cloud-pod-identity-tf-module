@@ -1,20 +1,24 @@
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["pod.eks.amazon.com"]
+    }
+
+    actions = [
+      "sts:AssumeRole",
+      "sts:TagSession"
+    ]
+  }
+}
+
 resource "aws_iam_role" "this" {
-  count = var.create_role == false ? 1 : 0
-  name  = var.role_name
-  assume_role_policy = jsondecode({
-    Version = "2012-10-17"
-    Statement = [{
-      Actions = [
-        "sts:AssumeRole",
-        "sts:TagSession"
-      ]
-      Effect = "Allow"
-      Principle = {
-        Service = "pod.eks.amazon.com"
-      }
-    }]
-  })
-  tags = var.tags
+  count              = var.create_role == false ? 1 : 0
+  name               = var.role_name
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  tags               = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "role_policy" {
