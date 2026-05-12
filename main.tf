@@ -38,5 +38,3 @@ resource "aws_eks_pod_identity_association" "pod_identity_association" {
   service_account = var.service_account_name
   role_arn        = coalesce(var.existing_role_arn, aws_iam_role.this[0].arn)
 }
-
-
