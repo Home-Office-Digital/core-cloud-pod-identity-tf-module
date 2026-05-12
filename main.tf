@@ -27,23 +27,16 @@ resource "aws_iam_role" "this" {
   tags = var.tags
 }
 
-module "eks_pod_identity_arn_association" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks-pod-identity.git?ref=776d089cf8b13dbff25e32e78272f8f693f5cb29"
+resource "aws_iam_role_policy_attachment" "role_policy" {
+  policy_arn = var.policy_arn
+  role       = aws_iam_role.this.name
+}
 
-  for_each = try(var.association_config.simple_policy_association, {})
-
-  use_name_prefix = false
-  name            = each.key
-
-  additional_policy_arns = tomap({
-    for arn_policy in each.value.iam_policy_arn_association :
-    element(split("/", arn_policy), length(split("/", arn_policy)) - 1) => arn_policy
-  })
-
-  association_defaults = try(each.value.association_defaults, {})
-
-  associations = tomap(each.value.cluster_association)
-  tags         = var.tags
+resource "aws_eks_pod_identity_association" "pod_identity_association" {
+  cluster_name    = var.cluster_name
+  namespace       = var.namespace
+  service_account = var.service_account_name
+  role_arn        = coalesce(var.existing_role_arn, aws_iam_role.this.arn)
 }
 
 

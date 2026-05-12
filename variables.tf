@@ -32,3 +32,23 @@ variable "role_name" {
   type    = string
   default = null
 }
+
+variable "policy_arn" {
+  type    = string
+  default = null
+}
+
+variable "cluster_name" {
+  type    = string
+  default = null
+}
+
+variable "namespace" {
+  type    = string
+  default = null
+}
+
+variable "service_account_name" {
+  type    = string
+  default = null
+}
