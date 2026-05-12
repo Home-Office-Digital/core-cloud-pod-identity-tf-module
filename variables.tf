@@ -1,3 +1,9 @@
+variable "create_role" {
+  type    = bool
+  default = false
+}
+
+
 variable "tags" {
   description = "Tags to be applied"
   type        = map(string)
