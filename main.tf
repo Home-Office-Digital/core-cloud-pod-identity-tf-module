@@ -29,12 +29,12 @@ resource "aws_iam_role" "this" {
 
 resource "aws_iam_role_policy_attachment" "role_policy" {
   policy_arn = var.policy_arn
-  role       = coalesce(var.existing_role_name, aws_iam_role.this[0].name)
+  role       = coalesce(var.existing_role_name, aws_iam_role.this[1].name)
 }
 
 resource "aws_eks_pod_identity_association" "pod_identity_association" {
   cluster_name    = var.cluster_name
   namespace       = var.namespace
   service_account = var.service_account_name
-  role_arn        = coalesce(var.existing_role_arn, aws_iam_role.this[0].arn)
+  role_arn        = coalesce(var.existing_role_arn, aws_iam_role.this[1].arn)
 }
