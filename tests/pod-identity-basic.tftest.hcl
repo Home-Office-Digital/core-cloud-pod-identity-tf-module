@@ -1,7 +1,13 @@
 ## Pod Identity TF Tests
 // Mock providers to avoid real AWS calls during tests.
-mock_provider "aws" {}
-
+mock_provider "aws" {
+  override_data {
+    target = data.aws_iam_policy_document.assume_role
+    values = {
+      json = "{}"
+    }
+  }
+}
 run "iam_role_created_successfully" {
   command = plan
 
