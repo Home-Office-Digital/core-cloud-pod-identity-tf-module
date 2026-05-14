@@ -6,8 +6,11 @@ run "iam_role_created_successfully" {
   command = plan
 
 variables {
-  create_role = true
-  role_name = "testing-role"
+  create_role          = true
+  role_name            = "testing-role"
+  cluster_name         = "test"
+  namespace            = "test"
+  service_account_name = "test-sa"
 }
 
   assert {
@@ -24,6 +27,28 @@ variables {
 
 run "validate_required_tags_on_iam_role" {
   command = plan
+
+variables {
+  create_role          = true
+  role_name            = "testing-role"
+  cluster_name         = "test"
+  namespace            = "test"
+  service_account_name = "test-sa"
+
+// Required tags
+  tags = {
+    cost-centre      = "CC1001"
+    account-code     = "AC2002"
+    portfolio-id     = "PF3003"
+    project-id       = "PR4004"
+    service-id       = "SV5005"
+    environment-type = "test"
+    owner-business   = "platform"
+    budget-holder    = "test"
+    source-repo      = "Home-Office-Digital/core-cloud-pod-identity-tf-module"
+  }
+
+}
 
   assert {
     condition     = contains(keys(aws_iam_role.this.tags), "cost-centre")
