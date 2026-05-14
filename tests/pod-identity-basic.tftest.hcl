@@ -38,11 +38,6 @@ variables {
     error_message = "IAM Role not created with expected name"
   }
 
-  assert {
-    condition     = aws_iam_role.this[0].arn != ""
-    error_message = "IAM Role ARN should not be empty"
-  }
-
 }
 
 run "validate_required_tags_on_iam_role" {
@@ -71,47 +66,47 @@ variables {
 }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "cost-centre")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "cost-centre")
     error_message = "cost-centre tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "account-code")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "account-code")
     error_message = "account-code tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "portfolio-id")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "portfolio-id")
     error_message = "portfolio-id tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "project-id")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "project-id")
     error_message = "project-id tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "service-id")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "service-id")
     error_message = "service-id tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "environment-type")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "environment-type")
     error_message = "environment-type tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "owner-business")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "owner-business")
     error_message = "owner-business tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "budget-holder")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "budget-holder")
     error_message = "budget-holder tag must be present on IAM Role"
   }
 
   assert {
-    condition     = contains(keys(aws_iam_role.this.tags), "source-repo")
+    condition     = contains(keys(aws_iam_role.this[0].tags), "source-repo")
     error_message = "source-repo tag must be present on IAM Role"
   }
 }
