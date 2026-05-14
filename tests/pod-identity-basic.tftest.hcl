@@ -11,6 +11,20 @@ variables {
   cluster_name         = "test"
   namespace            = "test"
   service_account_name = "test-sa"
+
+// Required tags
+  tags = {
+    cost-centre      = "CC1001"
+    account-code     = "AC2002"
+    portfolio-id     = "PF3003"
+    project-id       = "PR4004"
+    service-id       = "SV5005"
+    environment-type = "test"
+    owner-business   = "platform"
+    budget-holder    = "test"
+    source-repo      = "Home-Office-Digital/core-cloud-pod-identity-tf-module"
+  }
+
 }
 
   assert {
