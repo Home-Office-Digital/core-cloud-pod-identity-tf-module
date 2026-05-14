@@ -5,4 +5,3 @@ eg:
 ### [0.0.1] 2026-05-14
 
   * Initial tag created for Core Cloud Pod Identity Terraform module
-
