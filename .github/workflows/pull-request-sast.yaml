@@ -12,11 +12,7 @@ on:
       - main
   pull_request:
 
-permissions:
-  contents: read
-  id-token: write
-  actions: read
-  security-events: write
+permissions: {}
 
 jobs:
   RunTerraformValidation:
@@ -24,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_INPUT: "false"
+
+  permissions:
+    contents: read
+    id-token: write
+    actions: read
+    security-events: write
 
     steps:
       - name: Clone the Repository
