@@ -31,16 +31,15 @@ variables {
     budget-holder    = "test"
     source-repo      = "Home-Office-Digital/core-cloud-pod-identity-tf-module"
   }
-
 }
 
   assert {
-    condition     = aws_iam_role.this.name == "testing-role"
+    condition     = aws_iam_role.this[0].name == "testing-role"
     error_message = "IAM Role not created with expected name"
   }
 
   assert {
-    condition     = aws_iam_role.this.arn != ""
+    condition     = aws_iam_role.this[0].arn != ""
     error_message = "IAM Role ARN should not be empty"
   }
 
@@ -69,7 +68,6 @@ variables {
     budget-holder    = "test"
     source-repo      = "Home-Office-Digital/core-cloud-pod-identity-tf-module"
   }
-
 }
 
   assert {
