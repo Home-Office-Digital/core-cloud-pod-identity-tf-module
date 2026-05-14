@@ -17,6 +17,7 @@ variables {
   cluster_name         = "test"
   namespace            = "test"
   service_account_name = "test-sa"
+  policy_arn           = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 
 // Required tags
   tags = {
@@ -54,6 +55,7 @@ variables {
   cluster_name         = "test"
   namespace            = "test"
   service_account_name = "test-sa"
+  policy_arn           = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 
 // Required tags
   tags = {
