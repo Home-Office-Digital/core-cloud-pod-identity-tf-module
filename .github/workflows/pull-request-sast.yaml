@@ -1,0 +1,51 @@
+name: Validate Terraform with Checkov, TFLint and Sonarqube
+
+on:
+  workflow_call:
+    secrets:
+      sonar_token:
+        required: true
+      sonar_host_url:
+        required: true
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions: {}
+
+jobs:
+  RunTerraformValidation:
+    name: Run Terraform SAST
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TF_INPUT: "false"
+
+    steps:
+      - name: Clone the Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 #(4.0.0)
+        with:
+          terraform_version: ~1.9.0
+
+      - name: terraform init (no backend)
+        run: terraform init -backend=false
+
+      - name: Terraform tests
+        run: terraform test -no-color
+
+      - name: terraform validate
+        run: terraform validate
+
+      - name: Terraform Format
+        run: terraform fmt
+        
+      - name: TFLint
+        id: lint
+        if: success() || failure()
+        uses: Home-Office-Digital/core-cloud-workflow-tflint-scan@bf2c0ff3b50971dfb0937201e7457b8d2823698d #(0.3.1)

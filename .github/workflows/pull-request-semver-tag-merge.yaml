@@ -1,0 +1,46 @@
+name: 'SemVer Tag on Main Merge'
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  pull-requests: read
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  semver-tag:
+    name: 'Tag Repository with SemVer'
+    if: |
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.labels.*.name, 'skip-release') == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse the SemVer label
+        id: label
+        uses: UKHomeOffice/match-label-action@dc68ffbd7e59e81227b98eb9673a7efdb6998b1f #(v1)
+        with:
+          labels: minor,major,patch
+          mode: singular
+
+      - name: Calculate SemVer value
+        id: calculate
+        uses: UKHomeOffice/semver-calculate-action@5600697b08ad4bd96b27471573edc0cdb6992c26 #(v2)
+        with:
+          increment: ${{ steps.label.outputs.matchedLabels }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tag Repository
+        uses: UKHomeOffice/semver-tag-action@57dd6201d0f5635dc13c9b001bde428964a706c8 #(v4)
+        with:
+          tag: ${{ steps.calculate.outputs.version }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
