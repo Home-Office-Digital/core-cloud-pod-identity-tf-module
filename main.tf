@@ -23,7 +23,7 @@ resource "aws_iam_role" "this" {
 
 resource "aws_iam_role_policy_attachment" "role_policy" {
   policy_arn = var.policy_arn
-  role       = aws_iam_role.this[0].name
+  role       = try(aws_iam_role.this[0].name, null)
 }
 
 resource "aws_eks_pod_identity_association" "pod_identity_association" {
