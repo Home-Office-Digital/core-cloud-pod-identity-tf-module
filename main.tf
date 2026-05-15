@@ -22,8 +22,9 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "role_policy" {
+  count      = var.create_role == true ? 1 : 0
   policy_arn = var.policy_arn
-  role       = try(aws_iam_role.this[0].name, var.existing_role_name)
+  role       = aws_iam_role.this[0].name
 }
 
 resource "aws_eks_pod_identity_association" "pod_identity_association" {
