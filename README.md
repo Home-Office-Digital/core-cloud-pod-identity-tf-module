@@ -33,6 +33,7 @@ Please refer to the [Official Hashicorp Terraform Test documentation](https://de
 
 This module will create the following:
 - Optional IAM Role
+- EKS Pod Identity Trust Policy for IAM Roles created using this module, not existing roles
 - Pod Identity Association to bind to existing or created IAM Role
 
 Recommended settings:
@@ -51,7 +52,6 @@ inputs = {
 
   create_role          = false
   existing_role_arn    = "arn:aws:iam::xxx:role/test-role"
-  existing_role_name   = "test-role"
   policy_arn           = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
   cluster_name         = "test"
   namespace            = "test"
@@ -109,7 +109,6 @@ No modules.
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | n/a | `string` | n/a | yes |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | n/a | `bool` | `false` | no |
 | <a name="input_existing_role_arn"></a> [existing\_role\_arn](#input\_existing\_role\_arn) | n/a | `string` | `null` | no |
-| <a name="input_existing_role_name"></a> [existing\_role\_name](#input\_existing\_role\_name) | n/a | `string` | `null` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_policy_arn"></a> [policy\_arn](#input\_policy\_arn) | n/a | `string` | `null` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | n/a | `string` | `null` | no |
