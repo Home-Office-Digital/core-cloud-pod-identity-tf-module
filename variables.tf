@@ -35,11 +35,6 @@ variable "role_name" {
   default = null
 }
 
-variable "existing_role_name" {
-  type    = string
-  default = null
-}
-
 variable "policy_arn" {
   type    = string
   default = null

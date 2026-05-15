@@ -4,8 +4,8 @@ eg:
 
 ### [0.0.1] 2026-05-14
 
-  * Initial tag created for Core Cloud Pod Identity Terraform module
+  * Initial tag created for Core Cloud Pod Identity Terraform module.
 
 ### [0.0.2] 2026-05-15
 
-  * Updating Assume Role Policy
+  * Updating Assume Role Policy and Trust Policy only applied on newly created IAM Roles, not existing.

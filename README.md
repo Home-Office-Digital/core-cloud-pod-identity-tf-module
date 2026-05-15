@@ -33,6 +33,7 @@ Please refer to the [Official Hashicorp Terraform Test documentation](https://de
 
 This module will create the following:
 - Optional IAM Role
+- EKS Pod Identity Trust Policy for IAM Roles created using this module, not existing roles
 - Pod Identity Association to bind to existing or created IAM Role
 
 Recommended settings:
